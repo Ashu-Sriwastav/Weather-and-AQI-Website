@@ -1,0 +1,184 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+/* ---------------------------------- */
+
+.header-div{
+    /* height: 110px; */
+    width: 98vw;
+    display: flex;
+    border-bottom: 2px solid black;
+    margin-bottom: 10px;
+    
+    
+}
+.header-div div{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap-reverse;
+
+    
+}
+
+.header-div video,.header-div img{
+    height: 80px;
+    width: 100px;
+    align-self: center;
+}
+.header-div h1,.header-div h2{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header-div div h1,h2{
+    align-self: center;
+    text-align: center;
+
+}
+
+#temperature{
+    font-size: 50px;
+    /* margin-right: 10px; */
+    align-self: center;   
+}
+.header-div div video,#vis_img,#feels_like,#max_temp,#min_temp,#wind_speed,#clouds,#Visibility_data,#humidity_data{
+    font-size: 15px;
+    /* margin-right: 20px; */
+    align-self: center;
+    /* margin-left: 10px; */
+}
+
+#vis_img,#him_img{
+    align-self: center;
+}
+
+
+
+#searchCity_futureData{
+    display: flex;
+    flex-direction: row;
+    height: 250px;
+
+}
+#search_city{
+    width: 28vw;
+    height: 40px;
+    padding: 40px 0 0 30px;
+    min-height: 40px;
+    
+    
+}
+#city_name_lable{
+    font-size: 25px;
+    font-family: Verdana, sans-serif;
+}
+
+#city_name_data{
+    height: 30px;
+    width: 210px;
+}
+
+#city_submit{
+    height: 30px;
+    width: 60px;
+    font-size: 15px;
+}
+#table_data{
+    width: 65vw;
+    background-color: #90b8cf;
+    margin-left: 40px;
+
+
+}
+#table_data,#tr1 td,#tr2 td{
+    border: 1px solid black;
+  border-collapse: collapse;
+}
+
+
+#table_data tr td{
+text-align: center;
+padding: 10px 0  10px 0;
+border: 1px solid black;
+border-collapse:separate;
+
+
+}
+
+
+#current_Address{
+    width: 28vw;
+    height: 100px;
+    /* border: 3px solid red; */
+    min-height: 100px;
+    margin-top: 30px;
+    justify-content: center;
+    text-align: center;
+}
+
+#current_Address h2{
+    margin: 5px 0 5px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.air_data{
+    margin-top: 20px;
+    display: flex;
+    column-gap: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+
+}
+.air_data div img{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+
+
+.material-table{
+
+    width: 800px;
+    height: 400px;
+    margin-bottom: 20px;
+    align-self: center;
+}
+.material-table, .material-table tr, .material-table td{
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 8px;
+
+}
+
+
+.AQI_Data{
+    border-collapse: collapse;
+
+    width: 95%;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.AQI_R1 td,.AQI_R2 td{
+    border: 2px solid black;
+    padding: 6px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman' ;
+    font-size: 16px;
+
+    height: 150px;
+    text-align: center;
+    
+}
+#AQ4DayData{
+ text-align: center;
+ font-size: 30px;
+ color: blue;
+ padding-bottom: 10px;
+}
