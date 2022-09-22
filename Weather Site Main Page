@@ -1,0 +1,621 @@
+<html>
+
+<head>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="weather.css"> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,500;1,500&family=Oswald&family=Permanent+Marker&family=Poppins:ital,wght@0,300;0,400;1,400;1,500;1,600&family=Ubuntu:ital@1&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <div id="loader"></div>
+
+  <section class="sec1">
+    <div class="header-div">
+
+        <video onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" loop autoplay
+          style="height:100px;width:100px">
+          <source src="https://cdn-icons-mp4.flaticon.com/512/6455/6455015.mp4" type="">
+          </source>
+        </video>
+        <h1 id="temperature"></h1>
+
+        <h2 id="feels_like"></h2>
+
+
+        <video onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" loop autoplay>
+          <source src="https://cdn-icons-mp4.flaticon.com/512/6454/6454983.mp4" type="">
+          </source>
+        </video>
+        <h2 id="max_temp"></h2>
+
+        <video onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" loop autoplay>
+          <source src="https://cdn-icons-mp4.flaticon.com/512/6455/6455060.mp4" type="">
+          </source>
+        </video>
+        <h2 id="min_temp"></h2>
+
+        <video onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" loop autoplay height="100px"
+          width="100px">
+          <source src="https://cdn-icons-mp4.flaticon.com/512/6455/6455010.mp4" type="">
+          </source>
+        </video>
+        <h1 id="wind_speed"></h1>
+
+        <video onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" loop autoplay height="100px"
+          width="100px">
+          <source src="https://cdn-icons-mp4.flaticon.com/512/6455/6455024.mp4" type="">
+          </source>
+        </video>
+        <h1 id="clouds"></h1>
+
+        <img id="vis_img" src="https://cdn-icons-png.flaticon.com/512/5263/5263154.png" alt="" height="60px"
+          width="60px">
+        <h2 id="Visibility_data"></h2>
+
+        <img id="him_img" src="https://cdn-icons-png.flaticon.com/512/481/481453.png" alt="" height="60px" width="60px">
+        <h2 id="humidity_data"></h2>
+      </div>
+
+
+  </section>
+  <section id="sec2">
+  <div id="searchCity_futureData">
+    
+    <div id="search_city">
+      <label id="city_name_lable">Enter City</label>
+      <input type="text" name="" id="city_name_data" placeholder="Enter City...">
+      <input type="submit" name="" id="city_submit" onclick="getData()">
+      <div id="current_Address">
+        <h1 id="address">Location</h1>
+        <h2 id="latitude_show"></h2>
+        <h2 id="longitude_show"></h2>
+        <h2 id="AQI_NO"></h2>
+
+      </div>
+    </div>
+
+    <table id="table_data" >
+      <tr id="tr1">
+        <td id="td1"></td>
+        <td id="td2"></td>
+        <td id="td3"></td>
+        <td id="td4"></td>
+      </tr>
+      
+      <tr id="tr2">
+        <td id="td5"></td>
+        <td id="td6"></td>
+        <td id="td7"></td>
+        <td id="td8"></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+
+<section class="air_data">
+  <div><img src="https://forum.airnowtech.org/uploads/default/original/1X/c5862fe75275496b50a1865d97830e9a108f5f98.png" alt="" height="400px"></div>
+  <table class="material-table">
+    <thead style="background-color: aqua; font-size: 20px;">
+      <tr>
+        <th>Qualitative name</th>
+        <th>Index</th>
+        <th colspan="4">Pollutant concentration in &mu;g/m<sup>3</sup></th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr style="background-color: aqua; font-size: 18px; font-weight: bold;">
+        <td  colspan="2"></td>
+        <td >NO<sub>2</sub></td>
+        <td >PM<sub>10</sub></td>
+        <td >O<sub>3</sub></td>
+        <td >PM<sub>25</sub> (optional)</td>
+      </tr>
+      <tr style="background-color: rgb(124, 206, 0);  font-size: 18px; font-weight: bold;">
+        <td >Good</td>
+        <td >1</td>
+        <td >0-50</td>
+        <td >0-25</td>
+        <td >0-60</td>
+        <td >0-15</td>
+      </tr>
+      <tr style="background-color: yellow;  font-size: 18px; font-weight: bold;">
+        <td >Fair</td>
+        <td >2</td>
+        <td >50-100</td>
+        <td >25-50</td>
+        <td >60-120</td>
+        <td >15-30</td>
+      </tr>
+      <tr style="background-color: orange;  font-size: 18px; font-weight: bold;">
+        <td >Moderate</td>
+        <td >3</td>
+        <td >100-200</td>
+        <td >50-90</td>
+        <td >120-180</td>
+        <td >30-55</td>
+      </tr>
+      <tr style="background-color: red;  font-size: 18px; font-weight: bold;">
+        <td >Poor</td>
+        <td >4</td>
+        <td >200-400</td>
+        <td >90-180</td>
+        <td >180-240</td>
+        <td >55-110</td>
+      </tr>
+      <tr style="background-color: maroon;  font-size: 18px; font-weight: bold; color: white;">
+        <td >Very Poor</td>
+        <td >5</td>
+        <td >>400</td>
+        <td >>180</td>
+        <td >>240</td>
+        <td >>110</td>
+      </tr>
+    </tbody>
+    </table>
+</section>
+<section>
+    <table class="AQI_Data">
+      <th id="AQ4DayData" colspan="8">4 Days Air Quality Data</th>
+      <tr class="AQI_R1">
+        <td id="AQI_D1"></td>
+        <td id="AQI_D2"></td>
+        <td id="AQI_D3"></td>
+        <td id="AQI_D4"></td>
+        <td id="AQI_D5"></td>
+        <td id="AQI_D6"></td>
+        <td id="AQI_D7"></td>
+        <td id="AQI_D8"></td>
+      </tr>
+
+      <tr class="AQI_R2">
+        <td id="AQI_D9"></td>
+        <td id="AQI_D10"></td>
+        <td id="AQI_D11"></td>
+        <td id="AQI_D12"></td>
+        <td id="AQI_D13"></td>
+        <td id="AQI_D14"></td>
+        <td id="AQI_D15"></td>
+        <td id="AQI_D16"></td>
+
+      </tr>
+    </table>
+    
+  </section>
+
+
+
+<script>
+    // -------------------------------------------get Current Location------------------------------
+    getlocation()
+    var lan = 0;
+    var long = 0
+    function getlocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+
+      }
+    }
+    function showPosition(position) {
+      lan = position.coords.latitude;
+      long = position.coords.longitude;
+
+      local(lan, long);
+      future(lan, long);
+      air_data(lan, long);
+    }
+    // --------------------------------------------------Function for local weather Data--------------------------------------------------------
+    async function local(lan, long) {
+
+
+      // var city_name=document.getElementById('city_name_data').value;
+
+      // Enter your API key here
+      var api_key = "0f841214c51958d0d125a7a959ca2ec5";
+
+      // base_url variable to store url
+      var base_url = "https://api.openweathermap.org/data/2.5/weather?lat=" + lan + "&lon=" + long + "&appid=";
+
+
+      // complete_url variable to store
+      // complete url address
+      // http://api.openweathermap.org/data/3.0/onecall?lat=30.489772&lon=-99.771335&lang=zh_cn
+      var complete_url = base_url + api_key;
+
+      var br = "<br>"
+
+
+      const response = await fetch(complete_url)
+      const data = await response.json();
+      // console.log(data);
+
+      document.getElementById("temperature").innerHTML = Math.trunc(data.main.temp - 273.15) + "<span>&#176;</span>C";
+      document.getElementById("feels_like").innerHTML = "Feels Like" + br + Math.trunc(data.main.feels_like - 273.15) + "<span>&#176;</span>C";
+      document.getElementById("max_temp").innerHTML = "Max Temp" + br + Math.trunc(data.main.temp_max - 273.15) + "<span>&#176;</span>C";
+      document.getElementById("min_temp").innerHTML = "Min Temp" + br + Math.trunc(data.main.temp_min - 273.15) + "<span>&#176;</span>C";
+      document.getElementById("wind_speed").innerHTML = "Wind Speed" + br + (data.wind.speed) + "M/S";
+
+      if (data.clouds.all > 0 && data.clouds.all < 31) {
+        document.getElementById("clouds").innerHTML = "Few Clouds" + br + (data.clouds.all) + "%";
+      }
+      else if (data.clouds.all > 30 && data.clouds.all < 61) {
+        document.getElementById("clouds").innerHTML = "Much Clouds" + br + (data.clouds.all) + "%";
+      }
+      else {
+        document.getElementById("clouds").innerHTML = "Coverd " + br + (data.clouds.all) + "%";
+      }
+
+
+      document.getElementById("Visibility_data").innerHTML = "Visibility" + br + (data.visibility / 1000) + "KM";
+      document.getElementById("humidity_data").innerHTML = "Humidity" + br + (data.main.humidity) + "%";
+      // console.log(lan,long)
+      document.getElementById("latitude_show").innerHTML = "Latitude : "+(lan) + br;
+      document.getElementById("longitude_show").innerHTML = "Longitude : "+(long) + br;
+      
+
+    }
+// -------------------------------------------------------Call Function to get local Air Data----------------------------------------------------------------------------------------
+
+    async function air_data(lati,longi){
+      http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat={lat}&lon={lon}&appid={API key}
+      
+      var api_key = "86036e7d50175af1a3031778a60fd66f";
+
+      var base_url = "https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=" + lati + "&lon=" + longi + "&appid=";
+
+      var complete_url = base_url + api_key;
+
+      const response_future_data = await fetch(complete_url)
+
+      const future_data = await response_future_data.json();
+      console.log(future_data)
+      var value=0;
+      var table_col=["AQI_D1","AQI_D2","AQI_D3","AQI_D4","AQI_D5","AQI_D6","AQI_D7","AQI_D8","AQI_D9","AQI_D10","AQI_D11","AQI_D12","AQI_D13","AQI_D14","AQI_D15","AQI_D16"]
+      
+      for(var i=0;i<120;i++){
+        const unixTimestamp = (future_data.list[i]["dt"]);
+        const aqi= future_data.list;
+        const milliseconds = unixTimestamp * 1000 
+        const dateObject = new Date(milliseconds)
+        const humanDateFormat = dateObject.toLocaleString().split(",")
+        // console.log(humanDateFormat)
+
+        var co=future_data.list[i]["components"]["co"];
+        var no2=future_data.list[i]["components"]["no2"];
+        var pm10=future_data.list[i]["components"]["pm10"];
+        var o3=future_data.list[i]["components"]["o3"];
+        var aqi_num=future_data.list[i]["main"]["aqi"];
+
+        var br="<br>";
+
+
+        if(value<=16){
+          document.getElementById(table_col[value]).innerHTML="<img src='https://cdn-icons-png.flaticon.com/512/2370/2370279.png' style='height:20px;width:20px'> "+humanDateFormat[0]+br+"<img src='https://cdn-icons-png.flaticon.com/512/2838/2838590.png' style='height:20px;width:20px'>"+humanDateFormat[1]+br+"CO : "+
+          no2+br+"PM<sub>10</sub> : "+pm10+br+"O<sub>3</sub> : "+o3+co+br+"AQI : "+aqi_num;
+          document.getElementById("AQI_NO").innerHTML="Air Quality Index : "+aqi_num;
+        
+
+        }
+            if(aqi_num==1){
+              document.getElementById(table_col[value]).style.backgroundColor="rgb(124, 206, 0)";
+              document.getElementById(table_col[value]).style.color="black";
+
+              }
+
+            else if(aqi_num==2){
+              document.getElementById(table_col[value]).style.backgroundColor="yellow";
+              document.getElementById(table_col[value]).style.color="black";
+
+            }
+
+            else if(aqi_num==3){
+              document.getElementById(table_col[value]).style.backgroundColor="orange";
+              document.getElementById(table_col[value]).style.color="black";
+
+            }
+
+            else if(aqi_num==4){
+              document.getElementById(table_col[value]).style.backgroundColor="red";
+              document.getElementById(table_col[value]).style.color="White";
+
+            }
+
+            else if(aqi_num==5){
+              document.getElementById(table_col[value]).style.backgroundColor="maroon";
+              document.getElementById(table_col[value]).style.color="white";
+
+            }
+          
+
+
+        i=i+2;
+        value++;
+
+      }
+
+
+    }
+
+    // ----------------------------------------------------------------------Future Data --------------------------------------
+    async function future(lati, longi) {
+      
+      var api_key = "86036e7d50175af1a3031778a60fd66f";
+
+      var base_url = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lati + "&lon=" + longi + "&appid=";
+
+      var complete_url = base_url + api_key;
+
+      const response_future_data = await fetch(complete_url)
+
+      const future_data = await response_future_data.json();
+
+      // console.log(future_data);
+      var table_col_name = ["td1", "td2", "td3", "td4", "td5", "td6", "td7", "td8"];
+      for (var i = 0; i <= 8; i++) {
+        var date_time = future_data.list[i].dt_txt.split(" ");;
+        var date = date_time[0];
+        var time = date_time[1].split(":");
+        var pre_time;
+        var temp = future_data.list[i].main.temp - 273.15;
+        var visablity = future_data.list[i].visibility / 1000;
+
+        if (time[0] <= 12) {
+          time = time[0] % 12 + " AM"
+        }
+
+        if (time[0] == 00) {
+          time = 12 + " AM"
+        }
+
+        if (time[0] > 12) {
+          time = time[0] % 12 + " PM";
+        }
+
+        if (time[0] == 12) {
+          time = 12 + " PM"
+        }
+        if (pre_time == "9 AM") {
+          time = 12 + " PM"
+        }
+        
+        pre_time = time;
+        document.getElementById(table_col_name[i]).innerHTML = "<img src='https://cdn-icons-png.flaticon.com/512/2370/2370279.png' style='height:20px;width:20px'> " + 
+        date.split("-").reverse().join("-") + "<br>" + "<img src='https://cdn-icons-png.flaticon.com/512/2838/2838590.png' style='height:20px;width:20px'> " + 
+        time + "<br>" + "<img src='https://cdn-icons-png.flaticon.com/512/5826/5826412.png' style='height:20px;width:20px'> " + 
+        Math.trunc(temp) + "<span>&#176;</span>C" + "<br>" + "<img src='https://cdn-icons-png.flaticon.com/512/802/802016.png' style='height:20px;width:20px'> " + 
+        visablity + "KM";
+      }
+
+    }
+
+  // ------------------------------------------------------------Call Function to get Data By City------------------------------------------------------------------
+  
+  async function air_data_by_city(lati,longi){
+      http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat={lat}&lon={lon}&appid={API key}
+      
+      var api_key = "86036e7d50175af1a3031778a60fd66f";
+
+      var base_url = "https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=" + lati + "&lon=" + longi + "&appid=";
+
+      var complete_url = base_url + api_key;
+
+      const response_future_data = await fetch(complete_url)
+      const future_data = await response_future_data.json();
+
+      console.log(future_data)
+      var value=0;
+      var table_col=["AQI_D1","AQI_D2","AQI_D3","AQI_D4","AQI_D5","AQI_D6","AQI_D7","AQI_D8","AQI_D9","AQI_D10","AQI_D11","AQI_D12","AQI_D13","AQI_D14","AQI_D15","AQI_D16"]
+      
+      for(var i=0;i<97;i++){
+        const unixTimestamp = (future_data.list[i]["dt"]);
+        const aqi= future_data.list;
+        const milliseconds = unixTimestamp * 1000 
+        const dateObject = new Date(milliseconds)
+        const humanDateFormat = dateObject.toLocaleString().split(",")
+        // console.log(humanDateFormat)
+
+        var co=future_data.list[i]["components"]["co"];
+        var no2=future_data.list[i]["components"]["no2"];
+        var pm10=future_data.list[i]["components"]["pm10"];
+        var o3=future_data.list[i]["components"]["o3"];
+        var aqi_num=future_data.list[i]["main"]["aqi"];
+
+        console.log(aqi_num);
+        var br="<br>";
+
+
+        if(value<=16){
+
+          document.getElementById(table_col[value]).innerHTML="<img src='https://cdn-icons-png.flaticon.com/512/2370/2370279.png' style='height:20px;width:20px'> "+humanDateFormat[0]+br+"<img src='https://cdn-icons-png.flaticon.com/512/2838/2838590.png' style='height:20px;width:20px'>"+humanDateFormat[1]+br+"CO : "+
+          no2+br+"PM<sub>10</sub> : "+pm10+br+"O<sub>3</sub> : "+o3+co+br+"AQI : "+aqi_num;
+          document.getElementById("AQI_NO").innerHTML="Air Quality Index : "+aqi_num;
+       
+          if(aqi_num==1){
+              document.getElementById(table_col[value]).style.backgroundColor="rgb(124, 206, 0)";
+              document.getElementById(table_col[value]).style.color="black";
+              console.log(aqi_num)
+
+              }
+
+            else if(aqi_num==2){
+              document.getElementById(table_col[value]).style.backgroundColor="yellow";
+              document.getElementById(table_col[value]).style.color="black";
+              console.log(aqi_num)
+
+            }
+
+            else if(aqi_num==3){
+              document.getElementById(table_col[value]).style.backgroundColor="orange";
+              document.getElementById(table_col[value]).style.color="black";
+              console.log(aqi_num)
+
+            }
+
+            else if(aqi_num==4){
+              document.getElementById(table_col[value]).style.backgroundColor="red";
+              document.getElementById(table_col[value]).style.color="White";
+              console.log(aqi_num)
+
+            }
+
+            else if(aqi_num==5){
+              document.getElementById(table_col[value]).style.backgroundColor="maroon";
+              document.getElementById(table_col[value]).style.color="white";
+
+            }
+ 
+
+          value++;
+          
+        }
+        i=i+5;
+
+
+      }
+
+
+    }
+
+// ----------------------------------------Get Weather Data by City--------------------------------------------------------------------------------------------------------------------------
+    async function getData() {
+
+    
+      var city_name = document.getElementById('city_name_data').value;
+      if(city_name==""){
+        alert("Please Fill City Name!")
+      }
+
+      future_data_by_city(city_name)
+      // Enter your API key here
+      var api_key = "0f841214c51958d0d125a7a959ca2ec5";
+      // base_url variable to store url
+      var base_url = "http://api.openweathermap.org/data/2.5/weather?";
+      // complete_url variable to store
+      // complete url address
+      var complete_url = base_url + "appid=" + api_key + "&q=" + city_name;
+
+      const response = await fetch(complete_url)
+      const data = await response.json();
+      // console.log(data)
+      temp = data.main.temp;
+      max_temp = data.main.temp_max;
+      min_temp = data.main.temp_min;
+      feel_like = data.main.feels_like;
+      clouds = data.clouds.all;
+      //  console.log(clouds)
+      humidity = data.main.humidity;
+      wind_speed = data.wind.speed;
+      Visibility = data.visibility;
+
+      air_data_by_city(data.coord.lat,data.coord.lon)
+
+      br = "<br>";
+      
+
+      // ---------------------------- Edit in HTML Page-----------------------------------------------------------------
+
+      document.getElementById("temperature").innerHTML = Math.trunc(temp - 273.15) + "<span>&#176;</span>C";
+      document.getElementById("feels_like").innerHTML = "Feels Like" + br + Math.trunc(feel_like - 273.15) + "<span>&#176;</span>C";
+      document.getElementById("max_temp").innerHTML = "Max Temp" + br + Math.trunc(max_temp - 273.15) + "<span>&#176;</span>C";
+      document.getElementById("min_temp").innerHTML = "Min Temp" + br + Math.trunc(min_temp - 273.15) + "<span>&#176;</span>C";
+      document.getElementById("wind_speed").innerHTML = "Wind Speed" + br + (wind_speed) + "M/S";
+
+      if (clouds > 0 && clouds < 31) {
+        document.getElementById("clouds").innerHTML = "Few Clouds" + br + (clouds) + "%";
+      }
+      else if (clouds > 30 && clouds < 61) {
+        document.getElementById("clouds").innerHTML = "Much Clouds" + br + (clouds) + "%";
+      }
+      else {
+        document.getElementById("clouds").innerHTML = "Coverd " + br + (clouds) + "%";
+      }
+
+
+      document.getElementById("Visibility_data").innerHTML = "Visibility" + br + (Visibility / 1000) + "KM";
+      document.getElementById("humidity_data").innerHTML = "Humidity" + br + (humidity) + "%";
+      document.getElementById("latitude_show").innerHTML = "City : "+(data.name) + br;
+      document.getElementById("longitude_show").style.display="none"
+
+    }
+
+
+// -----------------------------------------------------Future Data by City-------------------------------------------
+    async function future_data_by_city(cityName) {
+      try{
+      var api_key = "86036e7d50175af1a3031778a60fd66f";
+
+      var base_url = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName +"&appid=";
+
+      var complete_url = base_url + api_key;
+
+      const response_future_data = await fetch(complete_url)
+
+      const future_data = await response_future_data.json();
+
+      // console.log(future_data)
+
+      // console.log(future_data);
+      var table_col_name = ["td1", "td2", "td3", "td4", "td5", "td6", "td7", "td8"];
+      for (var i = 0; i <= 8; i++) {
+        var date_time = future_data.list[i].dt_txt.split(" ");;
+        var date = date_time[0];
+        var time = date_time[1].split(":");
+        var pre_time;
+        var temp = future_data.list[i].main.temp - 273.15;
+        var visablity = future_data.list[i].visibility / 1000;
+
+        if (time[0] <= 12) {
+          time = time[0] % 12 + " AM"
+        }
+
+        if (time[0] == 00) {
+          time = 12 + " AM"
+        }
+
+        if (time[0] > 12) {
+          time = time[0] % 12 + " PM";
+        }
+
+        if (time[0] == 12) {
+          time = 12 + " PM"
+        }
+        if (pre_time == "9 AM") {
+          time = 12 + " PM"
+        }
+
+        pre_time = time;
+        document.getElementById(table_col_name[i]).innerHTML = 
+        "<img src='https://cdn-icons-png.flaticon.com/512/2370/2370279.png' style='height:20px;width:20px'> " + 
+        date.split("-").reverse().join("-") + "<br>" + "<img src='https://cdn-icons-png.flaticon.com/512/2838/2838590.png' style='height:20px;width:20px'> " + 
+        time + "<br>" + "<img src='https://cdn-icons-png.flaticon.com/512/5826/5826412.png' style='height:20px;width:20px'> " + 
+        Math.trunc(temp) + "<span>&#176;</span>C" + "<br>" + "<img src='https://cdn-icons-png.flaticon.com/512/802/802016.png' style='height:20px;width:20px'> " + 
+        visablity + "KM";
+      }
+
+
+
+    }
+    catch(err){
+      var api_key = "86036e7d50175af1a3031778a60fd66f";
+
+      var base_url = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName +"&appid=";
+
+      var complete_url = base_url + api_key;
+
+      const response_future_data = await fetch(complete_url)
+
+      const future_data = await response_future_data.json();
+      if(future_data.message=="city not found"){
+      alert(future_data.message)}
+    }
+  }
+
+  </script>
+</body>
+
+</html>
